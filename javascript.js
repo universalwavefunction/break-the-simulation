@@ -1,15 +1,14 @@
-const dropdown = document.getElementById('dropdown')
-const descriptionTitle = document.getElementById('description-title')
-const descriptionInfo = document.getElementById('description-info')
-descriptionTitle.style.display = 'none'
+const dropDown = document.getElementById('dropdown')
+const description = document.getElementById('description')
+description.style.display = 'none'
 
-dropdown.addEventListener('click', () => {
-    if (descriptionTitle.style.display == 'none') {
-        descriptionTitle.style.display = 'block'
-        descriptionInfo.style.display = 'block'
+dropDown.addEventListener('click', () => {
+    if (description.style.display == 'none') {
+        description.style.display = 'block'
+        dropDown.innerText = '>'
     }
     else {
-        descriptionTitle.style.display = 'none'
-        descriptionInfo.style.display = 'none'
+        description.style.display = 'none'
+        dropDown.innerText = 'v'
     }
 })
