@@ -1,14 +1,14 @@
 const dropDown = document.getElementById('dropdown')
-const description = document.getElementById('description')
-description.style.display = 'none'
+const contents = document.getElementById('day-contents')
+contents.style.display = 'flex'
 
 dropDown.addEventListener('click', () => {
-    if (description.style.display == 'none') {
-        description.style.display = 'block'
+    if (contents.style.display == 'none') {
+        contents.style.display = 'flex'
         dropDown.innerText = '>'
     }
     else {
-        description.style.display = 'none'
+        contents.style.display = 'none'
         dropDown.innerText = 'v'
     }
 })
