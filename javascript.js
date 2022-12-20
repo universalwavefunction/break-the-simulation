@@ -62,6 +62,18 @@ function addDay(day) {
     buttonContainer.appendChild(discordButton);
     buttonContainer.appendChild(completedBy);
 
+    // Add event listener to complete button
+    completeButton.addEventListener('click', () => {
+      if (checkbox.checked == true) {
+          checkbox.checked = false;
+          completeButton.textContent = 'Mark Complete';
+      }
+      else {
+          checkbox.checked = true;
+          completeButton.textContent = 'Not Complete';
+      }
+    })
+
     // Add event listener to drop down
     dropdown.addEventListener('click', () => {
       if (dayContents.style.display == 'none') {
@@ -72,7 +84,7 @@ function addDay(day) {
           dayContents.style.display = 'none'
           dropdown.textContent = '>'
       }
-  })
+    })
 
     // Return the container element
     return dayContainer;
@@ -112,7 +124,6 @@ const days = [
 
 
 
-//make checkbox/mark complete buttons work
 //make account to save progress and backend storage
 //add progress bar
 //add ability to submit videos (go to backend to be approved, then where do they go?)
