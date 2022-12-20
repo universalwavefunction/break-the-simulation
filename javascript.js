@@ -1,20 +1,3 @@
-/*
-const dropDown = document.getElementById('dropdown')
-const contents = document.getElementById('day-contents')
-contents.style.display = 'flex'
-
-dropDown.addEventListener('click', () => {
-    if (contents.style.display == 'none') {
-        contents.style.display = 'flex'
-        dropDown.innerText = '>'
-    }
-    else {
-        contents.style.display = 'none'
-        dropDown.innerText = 'v'
-    }
-})
-*/
-
 /*make days into a factory function with repeatable properties for each day,
 and each day as an item in an array*/
 function addDay(day) {
@@ -29,7 +12,9 @@ function addDay(day) {
 
     //create content for each day
     const dayContents = document.createElement('div');
+    const leftSide = document.createElement('div');
     const video = document.createElement('video');
+    const rightSide = document.createElement('div');
     const description = document.createElement('p');
 
     //create buttons and container
@@ -43,27 +28,51 @@ function addDay(day) {
     checkbox.type = 'checkbox';
     title.textContent = day.title;
     dropdown.textContent = 'v';
-    description.textContent = day.description;
+    description.innerHTML = day.description;
     video.src = day.videoUrl;
+    video.controls = true;
     video.type = day.videoType
     submitButton.textContent = 'Submit Video';
     completeButton.textContent = 'Mark Complete';
     discordButton.textContent = 'Discord';
     completedBy.textContent = day.completedBy;
 
+    // Add the classes, ids, and css to the elements
+    dayContents.className = 'day-contents';
+    description.id = "description"
+    dropdownContainer.className = 'dropdown-container';
+    dropdown.className = 'dropdown';
+    video.className = 'video';
+    title.className = 'title';
+
+
     // Add the elements to the container elements
+    dayContainer.appendChild(dropdownContainer);
+    dayContainer.appendChild(dayContents);
     dropdownContainer.appendChild(checkbox);
     dropdownContainer.appendChild(title);
     dropdownContainer.appendChild(dropdown);
-    dayContainer.appendChild(dropdownContainer);
-    dayContents.appendChild(description);
-    dayContents.appendChild(video);
-    dayContainer.appendChild(dayContents);
+    dayContents.appendChild(leftSide);
+    dayContents.appendChild(rightSide);
+    leftSide.appendChild(video);
+    rightSide.appendChild(description);
+    rightSide.appendChild(buttonContainer);
     buttonContainer.appendChild(submitButton);
     buttonContainer.appendChild(completeButton);
     buttonContainer.appendChild(discordButton);
     buttonContainer.appendChild(completedBy);
-    dayContainer.appendChild(buttonContainer);
+
+    // Add event listener to drop down
+    dropdown.addEventListener('click', () => {
+      if (dayContents.style.display == 'none') {
+          dayContents.style.display = 'flex'
+          dropdown.textContent = 'v'
+      }
+      else {
+          dayContents.style.display = 'none'
+          dropdown.textContent = '>'
+      }
+  })
 
     // Return the container element
     return dayContainer;
@@ -72,8 +81,8 @@ function addDay(day) {
 // Array of objects with the content for each item
 const days = [
     {
-      title: 'Day 1',
-      description: `Say hi to a random stranger<br>
+      title: 'Day 1 [Say hi👋]',
+      description: `Task:<br> Say hi to a random stranger<br>
       while walking anywhere<br>`,
       videoUrl: 'saying-hi-to-strangers.mp4',
       videoType: 'video/mp4',
@@ -103,6 +112,7 @@ const days = [
 
 
 
+//make checkbox/mark complete buttons work
 //make account to save progress and backend storage
 //add progress bar
 //add ability to submit videos (go to backend to be approved, then where do they go?)
