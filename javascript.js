@@ -26,6 +26,7 @@ function addDay(day) {
 
     // Set the content for the elements
     checkbox.type = 'checkbox';
+    checkbox.checked = JSON.parse(localStorage.getItem(`checkbox-${day.index}`));
     title.textContent = day.title;
     dropdown.textContent = 'v';
     description.innerHTML = day.description;
@@ -44,6 +45,8 @@ function addDay(day) {
     dropdown.className = 'dropdown';
     video.className = 'video';
     title.className = 'title';
+    completeButton.className = 'complete-button';
+    checkbox.className = 'complete-check';
 
 
     // Add the elements to the container elements
@@ -62,19 +65,16 @@ function addDay(day) {
     buttonContainer.appendChild(discordButton);
     buttonContainer.appendChild(completedBy);
 
-    // Add event listener to complete button
-    completeButton.addEventListener('click', () => {
-      if (checkbox.checked == true) {
-          localStorage.setItem(checkbox.checked, JSON.stringify(false));
-          checkbox.checked = JSON.parse(localStorage.getItem(checkbox.checked));
-          completeButton.textContent = 'Mark Complete';
+    // Add event listener to complete-button class
+    dayContainer.addEventListener('click', (event) => {
+      if (event.target.matches('.complete-button')) {
+        checkbox.checked = !checkbox.checked;
+        localStorage.setItem(`checkbox-${day.index}`, checkbox.checked);
       }
-      else {
-          localStorage.setItem(checkbox.checked, JSON.stringify(true));
-          checkbox.checked = JSON.parse(localStorage.getItem(checkbox.checked));
-          completeButton.textContent = 'Not Complete';
+      else if (event.target.matches('.complete-check')) {
+        localStorage.setItem(`checkbox-${day.index}`, checkbox.checked);
       }
-    })
+    });
 
     // Add event listener to drop down
     dropdown.addEventListener('click', () => {
@@ -100,21 +100,24 @@ const days = [
       while walking anywhere<br>`,
       videoUrl: 'saying-hi-to-strangers.mp4',
       videoType: 'video/mp4',
-      completedBy: 'Completed by: 3'
+      completedBy: 'Completed by: 3',
+      index: 1
     },
     {
       title: 'Day 2',
       description: 'This is the second day',
       videoUrl: '',
       videoType: '',
-      completedBy: 'Completed by: 3'
+      completedBy: 'Completed by: 3',
+      index: 2
     },
     {
       title: 'Day 3',
       description: 'This is the third day',
       videoUrl: '',
       videoType: '',
-      completedBy: 'Completed by: 3'
+      completedBy: 'Completed by: 3',
+      index: 3
     },
   ];
 
