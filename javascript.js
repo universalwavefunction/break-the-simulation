@@ -65,11 +65,13 @@ function addDay(day) {
     // Add event listener to complete button
     completeButton.addEventListener('click', () => {
       if (checkbox.checked == true) {
-          checkbox.checked = false;
+          localStorage.setItem(checkbox.checked, JSON.stringify(false));
+          checkbox.checked = JSON.parse(localStorage.getItem(checkbox.checked));
           completeButton.textContent = 'Mark Complete';
       }
       else {
-          checkbox.checked = true;
+          localStorage.setItem(checkbox.checked, JSON.stringify(true));
+          checkbox.checked = JSON.parse(localStorage.getItem(checkbox.checked));
           completeButton.textContent = 'Not Complete';
       }
     })
@@ -124,8 +126,10 @@ const days = [
 
 
 
-//make account to save progress and backend storage
+//make account to save progress and server side storage
+//make completed by work
 //add progress bar
+//make mobile and web versions
 //add ability to submit videos (go to backend to be approved, then where do they go?)
 //add ability to submit exercises/challenges (for social anx and other topics)
 //add profiles that show your progress and videos you've submitted
